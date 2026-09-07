@@ -1,0 +1,11 @@
+{
+  "name": "lendings-portfolio",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "sites/*"
+  ],
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}
