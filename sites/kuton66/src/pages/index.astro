@@ -1,17 +1,48 @@
 ---
+import Layout from '@lendings/ui/Layout.astro';
+import Hero from '@lendings/ui/Hero.astro';
+import ServicesPackages from '@lendings/ui/ServicesPackages.astro';
+import { business, servicePackages } from '../data/site';
 
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.toString();
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: business.name,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: business.address,
+    addressLocality: 'Каменск-Уральский',
+    addressCountry: 'RU',
+  },
+  url: canonicalUrl,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: business.rating,
+    reviewCount: business.reviewsCount,
+  },
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+	title={`${business.name} — детейлинг-студия в Каменске-Уральском`}
+	description={business.tagline}
+	canonicalUrl={canonicalUrl}
+	schema={schema}
+>
+	<Hero
+		businessName={business.name}
+		tagline={business.tagline}
+		ctaText="Записаться"
+		ctaHref="#booking"
+		rating={business.rating}
+		reviewsCount={business.reviewsCount}
+		address={business.address}
+	/>
+	<ServicesPackages heading="Услуги" packages={servicePackages} />
+
+	<p class="px-6 py-10 text-center text-xs text-neutral-600 sm:px-10">
+		Демонстрационный проект. Не является официальным сайтом компании.
+	</p>
+</Layout>

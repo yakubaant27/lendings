@@ -1,0 +1,40 @@
+---
+interface ServicePackage {
+  name: string;
+  priceFrom: number;
+  items: string[];
+}
+
+interface Props {
+  heading: string;
+  packages: ServicePackage[];
+}
+
+const { heading, packages } = Astro.props;
+const priceFormatter = new Intl.NumberFormat('ru-RU');
+---
+
+<section id="services" class="px-6 py-20 sm:px-10">
+	<div class="mx-auto max-w-6xl">
+		<h2 class="mb-10 text-3xl font-bold text-white sm:text-4xl">{heading}</h2>
+
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{packages.map((pkg) => (
+				<div class="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6">
+					<h3 class="text-xl font-semibold text-white">{pkg.name}</h3>
+					<p class="mt-2 text-2xl font-bold text-cyan-400">
+						от {priceFormatter.format(pkg.priceFrom)} ₽
+					</p>
+					<ul class="mt-4 flex flex-1 flex-col gap-2 text-neutral-300">
+						{pkg.items.map((item) => (
+							<li class="flex gap-2">
+								<span class="text-cyan-400">·</span>
+								<span>{item}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  businessName: string;
+  tagline: string;
+  ctaText: string;
+  ctaHref: string;
+  rating: number;
+  reviewsCount: number;
+  address: string;
+}
+
+const { businessName, tagline, ctaText, ctaHref, rating, reviewsCount, address } = Astro.props;
+---
+
+<section class="relative flex min-h-[90svh] flex-col justify-center overflow-hidden px-6 py-20 sm:px-10">
+	<div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.15),transparent_60%)]"></div>
+
+	<div class="mx-auto flex w-full max-w-3xl flex-col items-start gap-6">
+		<span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-neutral-300">
+			<span class="text-amber-400">★ {rating.toFixed(1)}</span>
+			<span class="text-neutral-500">·</span>
+			<span>{reviewsCount} отзывов на Яндекс.Картах</span>
+		</span>
+
+		<h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+			{businessName}
+		</h1>
+
+		<p class="max-w-xl text-lg text-neutral-300 sm:text-xl">
+			{tagline}
+		</p>
+
+		<a
+			href={ctaHref}
+			class="inline-flex items-center justify-center rounded-full bg-cyan-400 px-8 py-4 text-base font-semibold text-neutral-950 transition hover:bg-cyan-300 active:scale-[0.98]"
+		>
+			{ctaText}
+		</a>
+
+		<p class="text-sm text-neutral-500">{address}</p>
+	</div>
+</section>
