@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kuton66.yakuba-ant27.workers.dev/sitemap-index.xml
