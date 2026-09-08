@@ -2,7 +2,13 @@
 import Layout from '@lendings/ui/Layout.astro';
 import Hero from '@lendings/ui/Hero.astro';
 import ServicesPackages from '@lendings/ui/ServicesPackages.astro';
+import Gallery from '@lendings/ui/Gallery.astro';
 import { business, servicePackages } from '../data/site';
+import heroImage from '../assets/hero/bmw-tint.jpg';
+import tintDetail from '../assets/gallery/tint-detail.jpg';
+import detailingSuv from '../assets/gallery/detailing-suv.jpg';
+import detailingPriora from '../assets/gallery/detailing-priora.jpg';
+import fordFocusShop from '../assets/gallery/ford-focus-shop.jpg';
 
 const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.toString();
 
@@ -23,6 +29,13 @@ const schema = {
     reviewCount: business.reviewsCount,
   },
 };
+
+const galleryImages = [
+  { src: detailingSuv, alt: 'Детейлинг и полировка кузова — студия Ku_ton_66' },
+  { src: tintDetail, alt: 'Крупный план тонировочной плёнки на заднем стекле' },
+  { src: detailingPriora, alt: 'Результат комплексного детейлинга — глянцевый чёрный кузов' },
+  { src: fordFocusShop, alt: 'Автомобиль в боксе студии Ku_ton_66 на подъёмнике' },
+];
 ---
 
 <Layout
@@ -39,8 +52,10 @@ const schema = {
 		rating={business.rating}
 		reviewsCount={business.reviewsCount}
 		address={business.address}
+		backgroundImage={heroImage}
 	/>
 	<ServicesPackages heading="Услуги" packages={servicePackages} />
+	<Gallery heading="Наши работы" subheading="Реальные автомобили из нашей студии" images={galleryImages} />
 
 	<p class="px-6 py-10 text-center text-xs text-neutral-600 sm:px-10">
 		Демонстрационный проект. Не является официальным сайтом компании.
