@@ -1,10 +1,12 @@
 ---
 import Layout from '@lendings/ui/Layout.astro';
+import Header from '@lendings/ui/Header.astro';
 import Hero from '@lendings/ui/Hero.astro';
 import ServicesPackages from '@lendings/ui/ServicesPackages.astro';
 import Gallery from '@lendings/ui/Gallery.astro';
 import { business, servicePackages } from '../data/site';
 import heroImage from '../assets/hero/bmw-tint.jpg';
+import logoWhite from '../assets/brand/logo-white.png';
 import tintDetail from '../assets/gallery/tint-detail.jpg';
 import detailingSuv from '../assets/gallery/detailing-suv.jpg';
 import detailingPriora from '../assets/gallery/detailing-priora.jpg';
@@ -44,6 +46,7 @@ const galleryImages = [
 	canonicalUrl={canonicalUrl}
 	schema={schema}
 >
+	<Header logo={logoWhite} businessName={business.name} ctaText="Записаться" ctaHref="#booking" />
 	<Hero
 		businessName={business.name}
 		tagline={business.tagline}

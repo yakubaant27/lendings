@@ -7,9 +7,19 @@ interface Props {
   canonicalUrl: string;
   ogImage?: string;
   schema: Record<string, unknown>;
+  faviconHref?: string;
+  appleTouchIconHref?: string;
 }
 
-const { title, description, canonicalUrl, ogImage, schema } = Astro.props;
+const {
+  title,
+  description,
+  canonicalUrl,
+  ogImage,
+  schema,
+  faviconHref = '/favicon-512.png',
+  appleTouchIconHref = '/apple-touch-icon.png',
+} = Astro.props;
 const metrikaId = import.meta.env.PUBLIC_YANDEX_METRIKA_ID;
 ---
 
@@ -17,7 +27,8 @@ const metrikaId = import.meta.env.PUBLIC_YANDEX_METRIKA_ID;
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href={faviconHref} type="image/png" />
+		<link rel="apple-touch-icon" href={appleTouchIconHref} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="generator" content={Astro.generator} />
 

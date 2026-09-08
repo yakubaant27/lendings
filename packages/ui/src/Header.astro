@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  logo: ImageMetadata;
+  businessName: string;
+  ctaText: string;
+  ctaHref: string;
+}
+
+const { logo, businessName, ctaText, ctaHref } = Astro.props;
+---
+
+<header class="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-6 py-5 sm:px-10">
+	<a href="#" class="flex items-center gap-3">
+		<Image src={logo} alt={businessName} loading="eager" width={40} height={42} class="h-9 w-auto" />
+		<span class="text-sm font-semibold tracking-wide text-white sm:text-base">{businessName}</span>
+	</a>
+
+	<a
+		href={ctaHref}
+		class="hidden rounded-full border border-white/20 px-5 py-2 text-sm font-medium text-white transition hover:border-white/40 sm:inline-flex"
+	>
+		{ctaText}
+	</a>
+</header>
