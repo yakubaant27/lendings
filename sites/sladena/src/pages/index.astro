@@ -1,0 +1,75 @@
+---
+import Layout from '@lendings/ui/Layout.astro';
+import Header from '@lendings/ui/Header.astro';
+import Hero from '@lendings/ui/Hero.astro';
+import Catalog from '@lendings/ui/Catalog.astro';
+import CakeCalculator from '@lendings/ui/CakeCalculator.astro';
+import InfoList from '@lendings/ui/InfoList.astro';
+import Reviews from '@lendings/ui/Reviews.astro';
+import Contacts from '@lendings/ui/Contacts.astro';
+import BookingForm from '@lendings/ui/BookingForm.astro';
+import { getImage } from 'astro:assets';
+import { business, catalog, cakes, orderInfo, reviews } from '../data/site';
+import heroImage from '../assets/hero/bakery-display.jpg';
+
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.toString();
+const ogImageAsset = await getImage({ src: heroImage, width: 1200 });
+const ogImageUrl = new URL(ogImageAsset.src, canonicalUrl).toString();
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: business.name,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: business.address,
+    addressLocality: 'Каменск-Уральский',
+    addressCountry: 'RU',
+  },
+  url: canonicalUrl,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: business.rating,
+    reviewCount: business.reviewsCount,
+  },
+};
+---
+
+<Layout
+	title={`${business.name} — кондитерская в Каменске-Уральском`}
+	description={business.tagline}
+	canonicalUrl={canonicalUrl}
+	ogImage={ogImageUrl}
+	faviconHref="/favicon.svg"
+	schema={schema}
+>
+	<Header businessName={business.name} ctaText="Заказать" ctaHref="#booking" />
+	<Hero
+		businessName={business.name}
+		tagline={business.tagline}
+		ctaText="Заказать торт"
+		ctaHref="#booking"
+		rating={business.rating}
+		reviewsCount={business.reviewsCount}
+		address={business.address}
+		backgroundImage={heroImage}
+	/>
+	<Catalog heading="Каталог" catalog={catalog} />
+	<CakeCalculator
+		heading="Калькулятор стоимости торта"
+		subheading="Выберите вид торта и вес — покажем примерную цену"
+		cakes={cakes}
+	/>
+	<InfoList heading="Как заказать" items={orderInfo} />
+	<Reviews heading="Отзывы" rating={business.rating} reviewsCount={business.reviewsCount} reviews={reviews} />
+	<Contacts heading="Контакты" address={business.address} hours={business.hours} vk={business.vk} mapQuery={business.address} />
+	<BookingForm
+		heading="Заказать торт"
+		subheading="Оставьте заявку — уточним детали и оформим заказ"
+		workerUrl="https://sladena-telegram-form.yakuba-ant27.workers.dev"
+	/>
+
+	<p class="px-6 py-10 text-center text-xs text-neutral-600 sm:px-10">
+		Демонстрационный проект. Не является официальным сайтом компании.
+	</p>
+</Layout>
