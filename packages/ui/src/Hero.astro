@@ -14,6 +14,7 @@ interface Props {
 }
 
 const { businessName, tagline, ctaText, ctaHref, rating, reviewsCount, address, backgroundImage } = Astro.props;
+const isExternal = ctaHref.startsWith('http');
 ---
 
 <section class="relative flex min-h-[90svh] flex-col justify-center overflow-hidden px-6 py-20 sm:px-10">
@@ -51,6 +52,8 @@ const { businessName, tagline, ctaText, ctaHref, rating, reviewsCount, address, 
 
 		<a
 			href={ctaHref}
+			target={isExternal ? '_blank' : undefined}
+			rel={isExternal ? 'noopener noreferrer' : undefined}
 			class="inline-flex items-center justify-center rounded-full bg-cyan-400 px-8 py-4 text-base font-semibold text-neutral-950 transition hover:bg-cyan-300 active:scale-[0.98]"
 		>
 			{ctaText}

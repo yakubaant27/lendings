@@ -1,9 +1,0 @@
-{
-  // NOTE: Cloudflare Workers Builds overrides "name" with whatever
-  // "Project name" is typed in the dashboard when the project is created.
-  // Make sure to type "sladena-telegram-form" there, otherwise update
-  // the workerUrl in sites/sladena's BookingForm to match reality.
-  "name": "sladena-telegram-form",
-  "main": "src/index.js",
-  "compatibility_date": "2026-09-08"
-}
